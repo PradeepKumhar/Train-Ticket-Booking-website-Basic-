@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyTrainBooking</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<body>
+    <header><div class="header">
+        <a href="#default" class="logo">EasyTrainBooking</a>
+        <div class="header-right">
+        <a href="http://localhost:4500/bookings">Your Bookings</a>
+        <a href="http://localhost:4500/contactus">Contact us</a>
+        <a href="http://localhost:4500/aboutus">About Us</a>
+        </div>
+        </div>
+        <div style="padding-left:20px"> </div></header>
+
+
+
+
+<form action="/search" method="post">
+    <h2>Search for Trains</h2>
+    <label for="source">Source:</label>
+    <input type="text" id="source" name="source" required>
+    <br>
+
+    <label for="destination">Destination:</label>
+    <input type="text" id="destination" name="destination" required>
+    <br>
+    <!-- Add other search form fields as needed -->
+    <button type="submit">Search</button>
+</form>
+
+</body>
+</html>

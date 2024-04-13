@@ -1,0 +1,113 @@
+### Oracle Dates and Times
+
+- Oracle uses the `DATE` type for both date and time.
+
+- Format with `TO_CHAR` and override default using `TO_CHAR(<date>, '<format>')`.
+
+- Use `TO_DATE` for inputting dates.
+
+- Change default date format with `ALTER SESSION SET NLS_DATE_FORMAT='<my_format>'`.
+
+- Current time with `SYSDATE`.
+
+
+
+**Example:**
+
+```sql
+
+-- Display current date in a custom format
+
+SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD') AS current_date FROM dual;
+
+```
+
+
+
+### Views
+
+- Views hide columns for data security and minimize redundancy.
+
+- Create with `CREATE VIEW <view_name> AS SELECT ...`.
+
+- Rename columns in views.
+
+- Updateable views allow data manipulation (insert, update, delete).
+
+- Criteria for updateable views.
+
+
+
+**Example:**
+
+```sql
+
+-- Creating a view to show specific columns from the 'employees' table
+
+CREATE VIEW emp_view AS SELECT emp_id, emp_name FROM employees;
+
+```
+
+
+
+### Savepoints and Rollback
+
+- Savepoints with `SAVEPOINT` and rollback with `ROLLBACK TO SAVEPOINT`.
+
+- Release a savepoint with `RELEASE SAVEPOINT`.
+
+
+
+**Example:**
+
+```sql
+
+-- Using savepoints in a transaction
+
+SAVEPOINT sp1;
+
+-- (Operations in between)
+
+ROLLBACK TO SAVEPOINT sp1; -- Rollback to the savepoint
+
+```
+
+
+
+### Grant/Revoke Privileges
+
+- Grant privileges on tables with `GRANT <privileges> ON <table> TO <user>`.
+
+- Revoke privileges with `REVOKE <privileges> ON <table> FROM <user>`.
+
+
+
+**Example:**
+
+```sql
+
+-- Granting select and insert privileges on 'orders' table to 'user1'
+
+GRANT SELECT, INSERT ON orders TO user1;
+
+```
+
+
+
+### Grant/Revoke Privileges on Functions/Procedures
+
+- Grant execute privileges on functions/procedures with `GRANT EXECUTE ON <function/procedure> TO <user>`.
+
+- Revoke execute privileges with `REVOKE EXECUTE ON <function/procedure> FROM <user>`.
+
+
+
+**Example:**
+
+```sql
+
+-- Granting execute privilege on 'calculate_salary' function to 'hr_user'
+
+GRANT EXECUTE ON calculate_salary TO hr_user;
+
+

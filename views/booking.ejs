@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Bookings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('pic.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(3px);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(3px);
+            z-index: -1;
+        }
+
+        header {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+        }
+
+        .header a {
+            float: left;
+            color: black;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 15px;
+
+            line-height: 25px;
+            border-radius: 5px;
+        }
+
+        .header a.logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .header a:hover {
+            background-color: green;
+            color: black;
+        }
+
+        .header a.active {
+            background-color: green;
+            color: white;
+        }
+
+        .header-right {
+            float: right;
+        }
+
+        @media screen and (max-width: 500px) {
+            .header a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+
+            .header-right {
+                float: none;
+            }
+        }
+
+        header h1 {
+            margin: 0;
+            color: #333;
+        }
+
+        table {
+            margin-top: 50px;
+            width: 100%;
+            border-collapse: collapse;
+            overflow-x: auto;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            max-width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <header>
+            <div class="header">
+                <a href="http://localhost:4500" class="logo">EasyTrainBooking</a>
+                <div class="header-right">
+                    <a href="http://localhost:4500/contactus">Contact us</a>
+                    <a href="http://localhost:4500/aboutus">About Us</a>
+                </div>
+            </div>
+            <div style="padding-left:20px"> </div>
+        </header>
+    </div>
+    <h2>Your <br> Bookings</h2>
+    <div style="top: 100px; width: 100%; margin: 20px;">
+        <% if (bookings.length > 0) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Train Name</th>
+                    <th>Source Station</th>
+                    <th>Destination Station</th>
+                    <th>Seat Count</th>
+                    <th>Booking Time</th>
+                </tr>
+            </thead>
+            <tbody>
+              <% bookings.forEach(booking => { %>
+                  <tr>
+                      <td><%= booking.booking_id %></td>
+                      <td><%= booking.train_name %></td>
+                      <td><%= booking.source_station %></td>
+                      <td><%= booking.destination_station %></td>
+                      <td><%= booking.seat_count %></td>
+                      <td><%= booking.booking_time %></td>
+                      <!-- <td>
+                          <form action="/cancelBooking" method="post">
+                              <input type="hidden" name="booking_id" value="<%= booking.booking_id %>">
+                              <button type="submit">Cancel</button>
+                          </form>
+                      </td> -->
+                  </tr>
+              <% }); %>
+          </tbody>
+        </table>
+        <% } else { %>
+        <p>No bookings found for this user.</p>
+        <% } %>
+    </div>
+</body>
+
+</html>

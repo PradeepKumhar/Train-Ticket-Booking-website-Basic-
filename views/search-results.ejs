@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        button {
+            padding: 8px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header><div class="header">
+        <a href="#default" class="logo">EasyTrainBooking</a>
+        <div class="header-right">
+        <a href="http://localhost:4500/bookings">Your Bookings</a>
+        <a href="http://localhost:4500/contactus">Contact us</a>
+        <a href="http://localhost:4500/aboutus">About Us</a>
+        </div>
+        </div>
+        <div style="padding-left:20px"> </div></header>
+
+
+
+    <h2>Search Results</h2>
+    
+    <% if (trains.length > 0) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Train</th>
+                    <th>Source Station</th>
+                    <th>Destination Station</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% trains.forEach(train => { %>
+                    <tr>
+                        <td><%= train.train_name %></td>
+                        <td><%= train.source_station %></td>
+                        <td><%= train.destination_station %></td>
+                        <td><%= train.departure_time %></td>
+                        <td><%= train.arrival_time %></td>
+                        <td>
+                            <button onclick="bookTrain('<%= user_id %>', '<%= train.train_id %>')">Book</button>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>No trains found for the specified source and destination.</p>
+    <% } %>
+</body>
+<script>
+    function bookTrain(userId, trainId) {
+       
+        const user_id = userId;
+        const train_id = trainId;
+        const seat_count = 1; 
+      
+      
+        fetch(`/bookings/${user_id}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id,
+            train_id,
+            seat_count,
+          }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Success:', data);
+            
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            
+          });
+      }
+      
+</script>
+</html>
